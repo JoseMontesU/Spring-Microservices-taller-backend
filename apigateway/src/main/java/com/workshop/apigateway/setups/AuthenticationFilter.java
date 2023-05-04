@@ -51,6 +51,7 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
                         }else{
                             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Roles missing");
                         }
+                        log.info("Exchage: "+exchange.getResponse());
                         return exchange;
                     })
                     .onErrorMap(error -> { throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Communication Error", error.getCause());})

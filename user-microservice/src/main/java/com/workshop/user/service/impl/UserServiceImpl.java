@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
     @Override
     public List<UserDTO> getAll() {
-        return userMapper.toDTOList(userRepository.findAll());
+        return userMapper.toDTOList(userRepository.obtenerTodo());
     }
 
     @Transactional

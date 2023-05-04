@@ -9,6 +9,8 @@ services:
       - JAVA_OPTS=
         -Xms256M
         -Xmx256M
+    # networks:
+    #   - taller
 
 ######################################################
 
@@ -25,6 +27,8 @@ services:
       - registry-discovery
     ports:
       - 8888:8888
+    # networks:
+    #   - taller
 
 #######################################################
 
@@ -44,10 +48,12 @@ services:
       - configuration
     ports:
       - 8081:8081
+    # networks:
+    #   - taller
 
 ##########################################################
 
-  db:
+  mysql:
     image: mysql:8.0
     container_name: mysql_local
     restart: always
@@ -56,13 +62,32 @@ services:
       MYSQL_DATABASE: tallerdb
     ports:
       - 3306:3306
+    # networks:
+    #   - taller
+########################################################
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    environment:
+      - MYSQL_ROOT_PASSWORD=neo.123
+      - PMA_HOST=mysql
+    ports:
+      - '8078:80'
+    depends_on:
+      - mysql
 
-###########################################################
-
+################# Keycloak CON MYSQL ########################
   keycloak:
-    image: quay.io/keycloak/keycloak:20.0.1
+    image: quay.io/keycloak/keycloak
     container_name: keycloakServer
     environment:
+      KC_DB: mysql
+      KC_DB_URL: jdbc:mysql://mysql:3306/tallerdb
+      KC_DB_USERNAME: root
+      KC_DB_PASSWORD: neo.123
+      KC_HOSTNAME: localhost
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
     ports:
@@ -70,3 +95,6 @@ services:
     volumes:
       - ./config_realm/:/opt/keycloak/data/import:ro
     entrypoint: '/opt/keycloak/bin/kc.sh start-dev --import-realm'
+    # networks:
+    #   - taller
+

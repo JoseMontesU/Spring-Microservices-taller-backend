@@ -18,14 +18,14 @@ import java.util.List;
 @Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
-    private String lastName;
-    private String email;
-    @Column(name = "user_type_id")
-    private Long userTypeId;
-    @ManyToOne
-    @JoinColumn(name = "user_type_id", insertable = false, updatable = false)
-    private UserType userType;
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String id;
+    private String FIRST_NAME;
+    private String LAST_NAME;
+    private String EMAIL;
+//    @Column(name = "user_type_id")
+//    private Long userTypeId;
+//    @ManyToOne
+//    @JoinColumn(name = "user_type_id", insertable = false, updatable = false)
+//    private UserType userType;
 }
