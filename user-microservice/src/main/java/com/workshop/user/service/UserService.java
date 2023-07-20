@@ -11,7 +11,7 @@ import java.util.List;
 public interface UserService {
 
     List<UserDTO> getAll();
-    UserDTO save(UserDTO userDTO);
-    UserDTO getById(Long id);
+//    UserDTO save(UserDTO userDTO);
+    UserDTO getById(String id);
 
 }

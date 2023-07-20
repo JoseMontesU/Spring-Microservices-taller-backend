@@ -41,13 +41,13 @@ public class UserController {
         }
     }
 
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> save(@RequestBody UserDTO userDTO){
-        return new ResponseEntity<>(userService.save(userDTO), HttpStatus.CREATED);
-    }
+//    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<?> save(@RequestBody UserDTO userDTO){
+//        return new ResponseEntity<>(userService.save(userDTO), HttpStatus.CREATED);
+//    }
 
     @GetMapping(value = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getById(@PathVariable("id") Long id){
+    public ResponseEntity<?> getById(@PathVariable("id") String id){
         return userService.getById(id)==null?
                 new ResponseEntity<>(HttpStatus.NOT_FOUND):
                 new ResponseEntity<>(userService.getById(id), HttpStatus.OK);

@@ -45,8 +45,8 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
                         if(response != null){
                             log.info("See Objects: " + response);
                             //check for realm-admin rol
-                            if(response.get("realm-admin") == null || StringUtils.isEmpty(response.get("realm-admin").asText())){
-                                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Role realm-admin missing");
+                            if(response.get("realm-user") == null || StringUtils.isEmpty(response.get("realm-user").asText())){
+                                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Role realm-user missing");
                             }
                         }else{
                             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Roles missing");

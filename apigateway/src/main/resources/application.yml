@@ -20,17 +20,24 @@ spring:
         - id: user_service
           uri: lb://ms-user
           predicates:
-            - Path=/api/**
+            - Path=/api/user/**
             - Method=GET,POST,PUT,DELETE
           filters:
             - name: AuthenticationFilter
-        - id: person_service
-          uri: lb://ms-person
+        - id: cita_service
+          uri: lb://ms-citas
           predicates:
-            - Path=/person/**
+            - Path=/api/cita/**
             - Method=GET,POST,PUT,DELETE
           filters:
             - name: AuthenticationFilter
+#        - id: person_service
+#          uri: lb://ms-person
+#          predicates:
+#            - Path=/person/**
+#            - Method=GET,POST,PUT,DELETE
+#          filters:
+#            - name: AuthenticationFilter
 #          predicates:
 #            - Path=/**
 ##            - Path=/person/**

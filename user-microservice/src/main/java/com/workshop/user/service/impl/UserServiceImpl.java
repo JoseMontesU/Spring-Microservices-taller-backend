@@ -23,17 +23,9 @@ public class UserServiceImpl implements UserService {
         return userMapper.toDTOList(userRepository.obtenerTodo());
     }
 
-    @Transactional
     @Override
-    public UserDTO save(UserDTO userDTO) {
-        User userSaved = userRepository.save(userMapper.toEntity(userDTO));
-        return userMapper.toDTO(userSaved);
-    }
-
-    @Override
-    public UserDTO getById(Long id) {
-        return userRepository.findById(id).isPresent() ?
-                userMapper.toDTO(userRepository.findById(id).get()) : null;
+    public UserDTO getById(String id) {
+        return userMapper.toDTO(userRepository.findById(id));
     }
 
 }

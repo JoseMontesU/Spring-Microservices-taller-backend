@@ -10,10 +10,10 @@ spring:
     name: ms-user
   cloud:
     config:
-#      uri: http://localhost:8888
-      discovery:
-        enabled: true
-        service-id: config-server
+      uri: http://localhost:8888
+#      discovery:
+#        enabled: true
+#        service-id: config-server
       failFast: true
       #name of base properties config file, before profile
       name: config-client

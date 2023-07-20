@@ -51,6 +51,9 @@ public class IndexController {
 
             // check JWT role is correct
             List<String> roles = ((List) jwt.getClaim("realm_access").asMap().get("roles"));
+            List<String> id = ((List) jwt.getClaim("realm_access").asMap().get("id_token_claims_obj"));
+            logger.info("id: "+id);
+
 
             // check JWT is still active
             Date expiryDate = jwt.getExpiresAt();
@@ -85,7 +88,12 @@ public class IndexController {
 
     @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> login(String username, String password) {
-        String login = restService.login(username, password);
+        String login = "";
+        try {
+            login = restService.login(username, password);
+        }catch (Exception e){
+            return new ResponseEntity<>("Unauthorized user",HttpStatus.UNAUTHORIZED);
+        }
        return ResponseEntity.ok(login);
     }
 
